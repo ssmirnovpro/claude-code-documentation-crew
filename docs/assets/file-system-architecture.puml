@@ -1,0 +1,79 @@
+@startuml
+title File System Architecture: Configuration and State Management
+
+package "Project Root" {
+  folder "project-path" as ProjectRoot {
+    file "source code files" as SourceCode
+    file "package.json" as PackageJson
+    file "README.md" as ReadmeFile
+  }
+  
+  folder ".ccdocs/{project-name}/" as CcdocsRoot {
+    
+    folder "agent-handoffs/" as AgentHandoffs {
+      file "code-analyst-config.json" as CodeAnalystConfig
+      file "technical-writer-config.json" as TechnicalWriterConfig
+      file "critical-reader-analysis-config.json" as CriticalReaderConfig
+      file "api-specialist-config.json" as ApiSpecialistConfig
+      file "security-reviewer-config.json" as SecurityReviewerConfig
+      file "plantuml-diagrammer-config.json" as PlantUMLDiagrammerConfig
+    }
+    
+    folder "analysis/" as Analysis {
+      file "code-analysis.md" as CodeAnalysis
+      file "analysis-review-report.md" as AnalysisReview
+      file "validation-report.md" as ValidationReport
+      file "api-analysis.md" as ApiAnalysis
+      file "security-analysis.md" as SecurityAnalysis
+    }
+    
+    folder "drafts/" as Drafts {
+      file "{document-type}.md" as DocumentDrafts
+      file "diagram-metadata.json" as DiagramMetadata
+    }
+    
+    folder "diagrams/" as Diagrams {
+      file "{diagram-name}.puml" as PlantUMLSource
+      file "{diagram-name}.svg" as SVGRendered
+    }
+  }
+  
+  folder "output-location/" as OutputLocation {
+    folder "assets/" as Assets {
+      file "diagram-files.svg" as OutputDiagrams
+    }
+    file "final-documentation.md" as FinalDocs
+  }
+}
+
+' Data flow relationships
+SourceCode --> CodeAnalysis : analyzed by\ncode-analyst
+CodeAnalysis --> AnalysisReview : reviewed by\ncritical-reader
+ApiAnalysis --> DocumentDrafts : consumed by\ntechnical-writer
+SecurityAnalysis --> DocumentDrafts : consumed by\ntechnical-writer
+DocumentDrafts --> FinalDocs : finalized by\ntechnical-writer
+
+PlantUMLSource --> SVGRendered : rendered by\nKroki service
+SVGRendered --> OutputDiagrams : copied to assets
+DiagramMetadata --> OutputDiagrams : integration info
+
+' Configuration relationships
+CodeAnalystConfig --> CodeAnalysis : configures
+TechnicalWriterConfig --> DocumentDrafts : configures
+CriticalReaderConfig --> AnalysisReview : configures
+PlantUMLDiagrammerConfig --> PlantUMLSource : configures
+
+note right of CcdocsRoot
+  Complete state persistence
+  No memory dependencies
+  Audit trail maintenance
+  Agent coordination hub
+end note
+
+note bottom of OutputLocation
+  Final documentation location
+  Assets copied from diagrams/
+  Ready for distribution
+end note
+
+@enduml

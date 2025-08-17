@@ -1,0 +1,44 @@
+@startuml
+!theme plain
+skinparam defaultFontSize 14
+skinparam titleFontSize 16
+skinparam titleFontStyle bold
+
+title Installation and Setup Guide
+
+(*) --> "Check Prerequisites\n• Operating System: macOS, Linux, Windows\n• Disk Space: 100MB minimum\n• Network: Internet connection required"
+
+--> if "Claude Code CLI\ninstalled?" then
+  -->[no] "Install Claude Code CLI\nVisit https://claude.ai/code for installation instructions"
+  --> "Verify installation\nRun: claude-code --version"
+  --> "Setup tool"
+else
+  -->[yes] "Setup tool"
+endif
+
+"Setup tool" --> "Set up documentation tool\ngit clone [repository-url]\ncd claude-code-documentation-crew"
+
+--> "Test tool setup\nRun: /docs:generate --help"
+
+--> if "Tool working\ncorrectly?" then
+  -->[no] "Check file permissions\nEnsure .claude/commands/ directory is accessible"
+  --> "Local diagrams"
+else
+  -->[yes] "Local diagrams"
+endif
+
+"Local diagrams" --> "Optional: Set up local diagram service\nFor enhanced privacy and performance"
+
+--> if "Want local\ndiagrams?" then
+  -->[yes] "Install local Kroki\ndocker run -d -p 8001:8000\nyuzutech/kroki"
+  --> "Ready"
+else
+  -->[no] "Use external service\nInternet required for diagrams"
+  --> "Ready"
+endif
+
+"Ready" --> "Ready to generate documentation!"
+
+--> (*)
+
+@enduml

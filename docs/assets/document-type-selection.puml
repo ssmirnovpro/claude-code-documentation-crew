@@ -1,0 +1,47 @@
+@startuml
+!theme plain
+skinparam defaultFontSize 14
+skinparam titleFontSize 16
+skinparam titleFontStyle bold
+
+title Document Type Selection Guide
+
+(*) --> "What kind of project?"
+
+if "Has API endpoints?" then
+  -->[yes] "API Reference\nEndpoint docs with examples"
+  --> (*)
+else
+  -->[no] "Desktop or mobile app?"
+endif
+
+if "User interface?" then
+  -->[yes] "User Guide\nStep-by-step instructions"
+  --> (*)
+else
+  -->[no] "Library or framework?"
+endif
+
+if "For developers?" then
+  -->[yes] "Architecture Overview\nTechnical integration docs"
+  --> (*)
+else
+  -->[no] "Security requirements?"
+endif
+
+if "Sensitive data?" then
+  -->[yes] "Security Documentation\nCompliance analysis"
+  --> (*)
+else
+  -->[no] "Needs deployment?"
+endif
+
+if "Installation needed?" then
+  -->[yes] "Deployment Guide\nSetup instructions"
+  --> (*)
+else
+  -->[no] "Architecture Overview\n(default)"
+  --> (*)
+endif
+
+@enduml

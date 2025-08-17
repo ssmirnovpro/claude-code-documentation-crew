@@ -1,0 +1,89 @@
+@startuml
+title 8-Phase Multi-Agent Documentation Generation Workflow
+
+participant "Master Workflow" as Master
+participant "code-analyst" as CodeAnalyst
+participant "critical-reader" as CriticalReader
+participant "api-specialist" as ApiSpecialist
+participant "security-reviewer" as SecurityReviewer
+participant "technical-writer" as TechnicalWriter
+participant "plantuml-diagrammer" as PlantUMLDiagrammer
+
+note over Master : Phase 1: Foundation Analysis
+Master -> CodeAnalyst : Primary codebase analysis
+activate CodeAnalyst
+CodeAnalyst -> CodeAnalyst : Discovery, Deep Analysis,\nRelationship Mapping
+CodeAnalyst --> Master : code-analysis.md
+deactivate CodeAnalyst
+
+Master -> Master : Generate configuration files
+
+note over Master : Phase 2: Parallel Specialist Analysis
+Master -> ApiSpecialist : API analysis (if APIs detected)
+activate ApiSpecialist
+Master -> SecurityReviewer : Security analysis (if relevant)
+activate SecurityReviewer
+
+ApiSpecialist --> Master : api-analysis.md
+deactivate ApiSpecialist
+SecurityReviewer --> Master : security-analysis.md
+deactivate SecurityReviewer
+
+note over Master : Phase 3: Iterative Refinement Cycle\n(Max 2 iterations)
+loop Max 2 iterations
+    Master -> TechnicalWriter : Generate questions
+    activate TechnicalWriter
+    TechnicalWriter --> Master : analysis questions
+    deactivate TechnicalWriter
+    
+    Master -> CriticalReader : Review analysis
+    activate CriticalReader
+    CriticalReader -> CriticalReader : 6-phase validation
+    CriticalReader --> Master : analysis-review-report.md
+    deactivate CriticalReader
+    
+    alt Requires Correction
+        Master -> CodeAnalyst : Address identified issues
+        activate CodeAnalyst
+        CodeAnalyst --> Master : Updated analysis
+        deactivate CodeAnalyst
+        
+        Master -> CriticalReader : Validate corrections
+        activate CriticalReader
+        CriticalReader --> Master : Validation result
+        deactivate CriticalReader
+    else Approved
+        note over Master : Exit refinement cycle
+    end
+end
+
+note over Master : Phase 4: Document Creation
+Master -> TechnicalWriter : Final documentation
+activate TechnicalWriter
+TechnicalWriter -> TechnicalWriter : Generate comprehensive docs
+TechnicalWriter --> Master : Final documents
+deactivate TechnicalWriter
+
+Master -> CriticalReader : Document validation
+activate CriticalReader
+CriticalReader --> Master : validation-report.md
+deactivate CriticalReader
+
+note over Master : Phase 5: Visual Enhancement
+Master -> PlantUMLDiagrammer : Generate diagrams
+activate PlantUMLDiagrammer
+PlantUMLDiagrammer -> PlantUMLDiagrammer : Create and validate diagrams
+PlantUMLDiagrammer --> Master : SVG diagrams + metadata
+deactivate PlantUMLDiagrammer
+
+Master -> CriticalReader : Diagram validation
+activate CriticalReader
+CriticalReader --> Master : Diagram review
+deactivate CriticalReader
+
+note over Master : Phases 6-8: Finalization
+Master -> Master : Quality assurance
+Master -> Master : Output preparation
+Master -> Master : Audit trail creation
+
+@enduml

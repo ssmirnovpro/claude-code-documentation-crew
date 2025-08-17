@@ -1,0 +1,101 @@
+@startuml
+title Component Interaction: Agent Dependencies and Data Flow
+
+package "Foundation Layer" {
+  component [code-analyst] as CodeAnalyst
+  component [Configuration Files] as Config
+  component [Source Code] as SourceCode
+}
+
+package "Quality Assurance Layer" {
+  component [critical-reader] as CriticalReader
+  component [Validation Logic] as ValidationLogic
+  component [Quality Gates] as QualityGates
+}
+
+package "Specialist Analysis Layer" {
+  component [api-specialist] as ApiSpecialist
+  component [security-reviewer] as SecurityReviewer
+  component [API Detection] as ApiDetection
+  component [Security Patterns] as SecurityPatterns
+}
+
+package "Documentation Generation Layer" {
+  component [technical-writer] as TechnicalWriter
+  component [Document Templates] as DocTemplates
+  component [Output Formatting] as OutputFormatting
+}
+
+package "Visual Enhancement Layer" {
+  component [plantuml-diagrammer] as PlantUMLDiagrammer
+  component [Kroki Service] as KrokiService
+  component [Quality Validation] as DiagramQuality
+}
+
+package "External Dependencies" {
+  cloud [Kroki Local\n(localhost:8001)] as KrokiLocal
+  cloud [Kroki External\n(kroki.io)] as KrokiExternal
+  database [File System] as FileSystem
+}
+
+' Foundation dependencies
+SourceCode --> CodeAnalyst : reads
+Config --> CodeAnalyst : configures
+CodeAnalyst --> FileSystem : writes analysis
+
+' Quality assurance flow
+CodeAnalyst --> CriticalReader : analysis for review
+CriticalReader --> ValidationLogic : applies
+ValidationLogic --> QualityGates : enforces
+QualityGates --> CodeAnalyst : feedback loop
+
+' Specialist analysis
+CodeAnalyst --> ApiDetection : triggers
+ApiDetection --> ApiSpecialist : activates
+CodeAnalyst --> SecurityPatterns : identifies
+SecurityPatterns --> SecurityReviewer : activates
+ApiSpecialist --> FileSystem : writes API docs
+SecurityReviewer --> FileSystem : writes security analysis
+
+' Documentation generation
+CodeAnalyst --> TechnicalWriter : provides analysis
+ApiSpecialist --> TechnicalWriter : provides API info
+SecurityReviewer --> TechnicalWriter : provides security info
+TechnicalWriter --> DocTemplates : uses
+DocTemplates --> OutputFormatting : applies
+OutputFormatting --> FileSystem : writes final docs
+
+' Quality validation for docs
+TechnicalWriter --> CriticalReader : document review
+CriticalReader --> TechnicalWriter : validation feedback
+
+' Visual enhancement
+TechnicalWriter --> PlantUMLDiagrammer : diagram requests
+PlantUMLDiagrammer --> KrokiService : renders diagrams
+KrokiService --> KrokiLocal : primary service
+KrokiService --> KrokiExternal : fallback service
+KrokiLocal --> DiagramQuality : validates output
+KrokiExternal --> DiagramQuality : validates output
+DiagramQuality --> FileSystem : stores SVG files
+
+' Quality validation for diagrams
+PlantUMLDiagrammer --> CriticalReader : diagram review
+CriticalReader --> PlantUMLDiagrammer : diagram feedback
+
+note right of CriticalReader
+  Quality Gatekeeper
+  - 6-phase validation
+  - Binary approval logic
+  - Blocking issue detection
+  - Max 2 iterations
+end note
+
+note right of KrokiService
+  Dual-endpoint strategy
+  - Local service preferred
+  - External fallback
+  - Automatic switching
+  - Quality validation
+end note
+
+@enduml

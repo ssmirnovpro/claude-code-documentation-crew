@@ -1,0 +1,55 @@
+@startuml
+title System Architecture: Multi-Agent Documentation Generation Framework
+
+package "Hub-and-Spoke Coordination" {
+  component [Master Workflow\nOrchestrator] as MasterWorkflow
+  
+  package "Specialized Agents" {
+    component [code-analyst] as CodeAnalyst
+    component [technical-writer] as TechnicalWriter
+    component [critical-reader] as CriticalReader
+    component [api-specialist] as ApiSpecialist
+    component [security-reviewer] as SecurityReviewer
+    component [plantuml-diagrammer] as PlantUMLDiagrammer
+  }
+  
+  package "Configuration" {
+    component [JSON Config] as JsonConfig
+    component [Agent Handoffs] as AgentHandoffs
+  }
+  
+  package "State Management" {
+    database [File System] as FileSystem
+    component [.ccdocs Directory] as CcdocsDir
+  }
+  
+  package "External Services" {
+    cloud [Kroki Local] as KrokiLocal
+    cloud [Kroki External] as KrokiExternal
+  }
+}
+
+MasterWorkflow --> CodeAnalyst : orchestrates
+MasterWorkflow --> TechnicalWriter : orchestrates
+MasterWorkflow --> CriticalReader : validates
+MasterWorkflow --> ApiSpecialist : triggers
+MasterWorkflow --> SecurityReviewer : triggers
+MasterWorkflow --> PlantUMLDiagrammer : triggers
+
+JsonConfig --> AgentHandoffs
+AgentHandoffs --> CodeAnalyst
+AgentHandoffs --> TechnicalWriter
+AgentHandoffs --> CriticalReader
+
+FileSystem --> CcdocsDir
+CodeAnalyst --> FileSystem
+TechnicalWriter --> FileSystem
+CriticalReader --> FileSystem
+
+PlantUMLDiagrammer --> KrokiLocal : primary
+PlantUMLDiagrammer --> KrokiExternal : fallback
+
+CriticalReader --> CodeAnalyst : validates
+CriticalReader --> TechnicalWriter : validates
+
+@enduml

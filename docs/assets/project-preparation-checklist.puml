@@ -1,0 +1,27 @@
+@startuml
+!theme plain
+skinparam defaultFontSize 14
+skinparam titleFontSize 16
+skinparam titleFontStyle bold
+
+title Project Preparation Checklist
+
+(*) --> "Project Structure Check\n✓ Clear main entry points\n✓ Standard directory structure\n✓ Source code in logical directories\n✓ Remove build artifacts"
+
+--> "Configuration Files\n✓ package.json (Node.js)\n✓ requirements.txt (Python)\n✓ pom.xml or build.gradle (Java)\n✓ go.mod (Go) / composer.json (PHP)"
+
+--> "Code Quality Check\n✓ Add meaningful comments\n✓ Document public APIs\n✓ Include docstrings/JSDoc\n✓ Use descriptive names"
+
+--> "Documentation Files\n✓ Basic README.md (optional)\n✓ API documentation (if APIs exist)\n✓ Remove outdated documentation"
+
+--> "Security and Privacy\n⚠️ Remove or exclude sensitive files:\n• API keys and passwords\n• Private configuration files\n• Personal or customer data"
+
+--> "File Organization\n✓ Organize code in logical modules\n✓ Separate business logic from config\n✓ Use consistent naming conventions"
+
+--> "Test Coverage (Optional)\n✓ Include unit tests\n✓ Integration tests\n✓ Example files or demo applications"
+
+--> "Ready for Documentation Generation!"
+
+--> (*)
+
+@enduml

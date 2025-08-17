@@ -1,0 +1,21 @@
+@startuml
+!theme plain
+skinparam defaultFontSize 14
+skinparam titleFontSize 16
+skinparam titleFontStyle bold
+
+title Quick Start: Generate Documentation in 5 Steps
+
+(*) --> "Navigate to your project directory\ncd /path/to/your/project"
+
+--> "Run the documentation command\n/docs:generate ."
+
+--> "Answer setup questions\n• Which documents do you need?\n• Target audience?\n• Include diagrams?\n• Output format?"
+
+--> "Wait for processing\n• Small projects: 2-5 minutes\n• Medium projects: 5-15 minutes\n• Large projects: 15-30 minutes"
+
+--> "Review your documentation\nCheck ./docs/ directory"
+
+--> (*)
+
+@enduml

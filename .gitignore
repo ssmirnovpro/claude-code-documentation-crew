@@ -1,0 +1,75 @@
+# Claude Code Documentation Generator
+# Multi-Agent Documentation System
+
+# Working directories (temporary files)
+.ccdocs/
+*.tmp
+*.temp
+
+# Generated documentation (user decides where to put final docs)
+# docs/ - Commented out as user may want to version final docs
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# Logs and debug files
+*.log
+debug.log
+error.log
+*.debug
+
+# Temporary agent communication files
+agent-handoffs/*.tmp
+agent-handoffs/*.temp
+
+# Session state files (may contain sensitive project paths)
+session-state.json
+orchestration-timeline.jsonl
+
+# Environment and configuration
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Dependencies (if any Node.js tooling added later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python cache (if any Python tooling added)
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# PlantUML temporary files
+*.puml.png
+*.puml.svg
+diagrams/*.png
+diagrams/*.svg
+
+# Claude Code specific
+.claude-server-commander-logs/
