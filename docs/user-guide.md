@@ -246,14 +246,8 @@ your-project/
 └── docs/                  # Existing documentation (will be verified)
 ```
 
-**Supported Programming Languages:**
-- **JavaScript/TypeScript**: React, Node.js, Express, Next.js projects
-- **Python**: Django, Flask, FastAPI, standard Python applications
-- **Java**: Spring Boot, Maven, Gradle projects
-- **Go**: Standard Go project structure
-- **PHP**: Laravel, Symfony, standard PHP projects
-- **C#**: .NET Core, ASP.NET projects
-- **Ruby**: Rails, Sinatra projects
+**Language Agnostic Documentation:**
+The Documentation Crew analyzes any programming language and project structure. It intelligently adapts to your codebase regardless of technology stack, from traditional languages like C/C++ to modern frameworks and emerging technologies.
 
 **File Types That Improve Documentation:**
 - **Configuration Files**: `package.json`, `requirements.txt`, `docker-compose.yml`

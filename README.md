@@ -112,14 +112,8 @@ docker run -d -p 8001:8000 yuzutech/kroki
 
 **Without local setup**: Automatically uses kroki.io public API (slightly slower but fully functional)
 
-### Supported Project Types
-- **JavaScript/TypeScript**: React, Node.js, Express, Next.js
-- **Python**: Django, Flask, FastAPI applications  
-- **Java**: Spring Boot, Maven, Gradle projects
-- **Go**: Standard Go project structure
-- **PHP**: Laravel, Symfony applications
-- **C#**: .NET Core, ASP.NET projects
-- **Ruby**: Rails, Sinatra applications
+### Language Agnostic Analysis
+The Documentation Crew works with **any programming language** and project structure. From traditional C/C++ to modern Rust, from Python to assembly - the multi-agent system intelligently adapts to your codebase technology stack.
 
 ## 🤝 Contributing
 
