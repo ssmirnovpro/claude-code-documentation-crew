@@ -99,7 +99,7 @@ The system will ask you several questions:
 
 6. **Document format?**
    - Markdown (recommended): Works with GitHub, GitLab, etc.
-   - HTML or PDF also available
+   - HTML also available
 
 ### Step 2: Wait for Processing
 

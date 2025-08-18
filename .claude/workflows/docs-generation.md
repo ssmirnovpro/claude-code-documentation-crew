@@ -17,7 +17,7 @@ Ask user questions. One by one.
 
 5. "Include diagrams?" (Yes/No)
 
-6. "Document format?" (markdown/html/pdf)
+6. "Document format?" (markdown/html)
 
 ## Phase 2: Requirements Confirmation
 

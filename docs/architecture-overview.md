@@ -23,7 +23,7 @@
 
 ```bash
 # Generate comprehensive documentation for your project
-/docs:generate [project-path] [--docs-location path] [--format markdown|html|pdf] [--diagrams]
+/docs:generate [project-path] [--docs-location path] [--format markdown|html] [--diagrams]
 ```
 
 ### Minimal Working Example

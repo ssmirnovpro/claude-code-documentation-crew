@@ -158,10 +158,9 @@ The tool will ask you a few questions to customize the documentation:
    - Yes: Generates visual diagrams for architecture and workflows
    - No: Text-only documentation
 
-5. **"Document format?"** (markdown/html/pdf)
+5. **"Document format?"** (markdown/html)
    - Markdown: Easy to edit and version control (recommended)
    - HTML: Ready for web publishing
-   - PDF: Professional reports and printed documentation
 
 **Step 4: Wait for Processing**
 The tool will analyze your code and generate documentation. This typically takes:
@@ -221,7 +220,6 @@ start ./docs/README.md  # (Windows)
 **`--format`** (optional, default: `markdown`):
 - `markdown`: GitHub-friendly format, easy to edit
 - `html`: Web-ready with navigation and styling
-- `pdf`: Professional document format
 
 **`--diagrams`** (optional, default: auto-detect):
 - Includes visual architecture and workflow diagrams
@@ -790,7 +788,6 @@ git push
 **Enterprise Applications:**
 - Include Security Documentation for compliance
 - Generate Deployment Guides for operations teams
-- Use PDF format for formal documentation packages
 
 **Microservices:**
 - Document each service separately

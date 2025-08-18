@@ -7,7 +7,7 @@ description: "Generate comprehensive technical documentation using multi-agent o
 
 ## Usage
 ```
-/docs:generate [project-path] [--docs-location path] [--format markdown|html|pdf] [--diagrams]
+/docs:generate [project-path] [--docs-location path] [--format markdown|html] [--diagrams]
 ```
 
 ## Arguments
