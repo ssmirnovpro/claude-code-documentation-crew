@@ -29,9 +29,27 @@ You will:
 ### Phase 2: Deep Analysis
 1. Read key files to understand architectural patterns
 2. Use Grep to find cross-references and dependencies
-3. Identify class hierarchies and inheritance patterns
-4. Extract function signatures and API endpoints
-5. Detect design patterns (MVC, Repository, Factory, etc.)
+3. **Search for Language-Agnostic Implementation Patterns**:
+
+**API Implementation Indicators** (semantic patterns, not syntax-specific):
+- **Network listeners**: Look for network binding/listening code patterns
+- **Route handlers**: Functions handling different HTTP methods regardless of syntax
+- **Request/response processing**: Code handling HTTP requests and generating responses
+- **Port binding**: Code that binds to network ports
+- **URL routing**: Code that maps URLs to handlers
+- **HTTP method handling**: Code distinguishing between GET, POST, PUT, DELETE operations
+
+**Security Implementation Indicators** (semantic patterns, not syntax-specific):
+- **Authentication flows**: Code managing user login/logout processes
+- **Password handling**: Code doing password hashing, verification, or storage
+- **Token operations**: Code generating, validating, or managing access tokens
+- **Permission checking**: Code that validates user permissions or roles
+- **Data encryption**: Code performing encryption, decryption, or hashing operations
+- **Input sanitization**: Code validating or sanitizing user inputs
+
+4. Identify class hierarchies and inheritance patterns
+5. Extract function signatures and API endpoints
+6. Detect design patterns (MVC, Repository, Factory, etc.)
 
 ### Phase 3: Relationship Mapping
 1. Build import/export dependency graphs
@@ -40,10 +58,22 @@ You will:
 4. Document inter-module communication patterns
 
 ### Phase 4: Documentation Preparation
-1. Compile findings into structured markdown format
-2. Prioritize components by importance and complexity
-3. Flag security-sensitive areas for special attention
-4. Identify documentation gaps and undocumented behaviors
+1. **Calculate Implementation Detection Summary Values** (based on semantic analysis, not syntax):
+   - **ENDPOINTS_IMPLEMENTED**: Count actual network endpoint implementations found through semantic analysis
+   - **ROUTE_HANDLERS_FOUND**: List specific files containing request/response handling logic
+   - **API_FRAMEWORKS_DETECTED**: List any web/API frameworks detected from imports/dependencies, regardless of language
+   - **DATABASE_CRUD_OPERATIONS**: Set to `true` if any data persistence operations found (create, read, update, delete operations)
+   - **AUTHENTICATION_IMPLEMENTED**: Set to `true` if any user authentication logic found through semantic analysis
+   - **AUTHORIZATION_LOGIC_FOUND**: Set to `true` if access control/permissions logic found through behavioral analysis
+   - **ENCRYPTION_USAGE_DETECTED**: Set to `true` if cryptographic operations found through semantic analysis
+   - **INPUT_VALIDATION_IMPLEMENTED**: Set to `true` if input validation/sanitization logic found through behavioral analysis
+   - **PROJECT_TYPE**: Classify based on implementation vs. specification content found
+   - **IMPLEMENTATION_COMPLETENESS**: Assess based on ratio of implemented vs. specified features
+
+2. Compile findings into structured markdown format
+3. Prioritize components by importance and complexity
+4. Flag security-sensitive areas for special attention
+5. Identify documentation gaps and undocumented behaviors
 
 ## Output Format
 
@@ -51,6 +81,24 @@ Your analysis reports must follow this structure:
 
 ```markdown
 # Codebase Analysis Report
+
+## Implementation Detection Summary
+
+### API Implementation Status
+- ENDPOINTS_IMPLEMENTED: [exact count of endpoint implementations found]
+- ROUTE_HANDLERS_FOUND: [list specific files with route handlers]
+- API_FRAMEWORKS_DETECTED: [list of frameworks like Express.js, FastAPI, Spring Boot, etc.]
+- DATABASE_CRUD_OPERATIONS: [true/false based on actual CRUD operation detection]
+
+### Security Implementation Status  
+- AUTHENTICATION_IMPLEMENTED: [true/false based on actual auth code detection]
+- AUTHORIZATION_LOGIC_FOUND: [true/false based on actual access control code]
+- ENCRYPTION_USAGE_DETECTED: [true/false based on actual encryption/hashing code]
+- INPUT_VALIDATION_IMPLEMENTED: [true/false based on actual validation code]
+
+### Project Classification
+- PROJECT_TYPE: [Implementation|Specification|Mixed|Configuration]
+- IMPLEMENTATION_COMPLETENESS: [None|Partial|Complete]
 
 ## Architecture Overview
 - High-level description of system architecture

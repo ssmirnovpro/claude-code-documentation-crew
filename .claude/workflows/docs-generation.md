@@ -143,43 +143,102 @@ For each required agent, create config file in `agent-handoffs/`:
 }
 ```
 
-## Phase 4: Agent Selection
+## Phase 4: Intelligent Specialist Selection
 
-### Universal Agent Flow
+### Step 4.1: Read Implementation Detection Summary
 
-All document types follow the same comprehensive flow with specialized analysis based on content requirements:
+After code-analyst completes initial analysis, read the Implementation Detection Summary from `./.ccdocs/{project}/analysis/code-analysis.md` to extract objective selection criteria:
+
+```
+API Implementation Status:
+- ENDPOINTS_IMPLEMENTED: [count]
+- ROUTE_HANDLERS_FOUND: [list of files]
+- API_FRAMEWORKS_DETECTED: [list]
+- DATABASE_CRUD_OPERATIONS: [true/false]
+
+Security Implementation Status:
+- AUTHENTICATION_IMPLEMENTED: [true/false]
+- AUTHORIZATION_LOGIC_FOUND: [true/false]
+- ENCRYPTION_USAGE_DETECTED: [true/false]
+- INPUT_VALIDATION_IMPLEMENTED: [true/false]
+
+Project Classification:
+- PROJECT_TYPE: [Implementation|Specification|Mixed|Configuration]
+- IMPLEMENTATION_COMPLETENESS: [None|Partial|Complete]
+```
+
+### Step 4.2: Automated Decision Logic
+
+Apply objective specialist selection rules:
+
+**API Specialist Selection Logic:**
+```
+IF (ENDPOINTS_IMPLEMENTED > 0 
+    OR len(API_FRAMEWORKS_DETECTED) > 0 
+    OR DATABASE_CRUD_OPERATIONS == true)
+THEN launch api-specialist
+ELSE skip api-specialist
+```
+
+**Security Specialist Selection Logic:**
+```
+IF (AUTHENTICATION_IMPLEMENTED == true
+    OR AUTHORIZATION_LOGIC_FOUND == true
+    OR ENCRYPTION_USAGE_DETECTED == true)
+THEN launch security-reviewer  
+ELSE skip security-reviewer
+```
+
+### Step 4.3: Decision Transparency
+
+Before proceeding, output specialist selection decision log:
+
+```
+## Specialist Selection Decision Log
+✅ API Specialist: [LAUNCH|SKIP] - Rationale: [specific findings from detection summary]
+✅ Security Specialist: [LAUNCH|SKIP] - Rationale: [specific findings from detection summary]
+📊 Evidence: [list specific code patterns/files found]
+🏷️ Project Type: [PROJECT_TYPE from detection summary]
+```
+
+### Step 4.4: Universal Agent Flow
+
+All document types follow this flow with specialists selected objectively:
 
 **Core Analysis Flow**:
-1. **code-analyst** → provides foundational codebase analysis
-2. **Parallel Specialist Analysis** (as needed):
-   - **api-specialist** → if APIs/endpoints detected
-   - **security-reviewer** → if security aspects relevant
-3. **Iterative Writing Cycle**:
+1. **code-analyst** → provides foundational analysis with Implementation Detection Summary
+2. **Objective Specialist Selection** → apply automated decision logic
+3. **Parallel Specialist Analysis** (only if criteria met):
+   - **api-specialist** → if objective API criteria satisfied
+   - **security-reviewer** → if objective security criteria satisfied
+4. **Iterative Writing Cycle**:
    - **technical-writer** (question generation) + **critical-reader** (analysis review) → parallel
    - **code-analyst** (address questions/issues)
    - **critical-reader** (validate corrections)
    - **technical-writer** (final document creation)
-4. **Visual Enhancement** (if diagrams requested):
+5. **Visual Enhancement** (if diagrams requested):
    - **plantuml-diagrammer** → create/enhance diagrams
    - **critical-reader** (diagram validation)
 
-### Dynamic Specialist Selection
+### Step 4.5: Edge Case Handling
 
-Based on project analysis, automatically include relevant specialists:
+**Pure Specification Projects** (PROJECT_TYPE: Specification, IMPLEMENTATION_COMPLETENESS: None):
+- Skip all specialists
+- Document architectural intentions only
+- Note: "Specialists skipped - specification-only project with no implementation"
 
-**API-focused content**: Include **api-specialist** if:
-- REST endpoints found in code
-- GraphQL schemas detected  
-- API documentation requested
-- Microservices architecture identified
+**Mixed Projects** (PROJECT_TYPE: Mixed):
+- Launch specialists only if implementation criteria met
+- Document both specification and implementation aspects
 
-**Security-focused content**: Include **security-reviewer** if:
-- Authentication/authorization code found
-- Security documentation requested
-- External integrations detected
-- Compliance requirements mentioned
+**Configuration-Only Projects** (PROJECT_TYPE: Configuration):
+- Skip specialists unless security configs contain actual implementation
+- Focus on deployment and configuration documentation
 
-**Architecture-focused content**: Always include **plantuml-diagrammer** if diagrams requested (regardless of document type)
+**When in Doubt**:
+- Default to SKIP specialist
+- Document rationale: "Insufficient objective evidence for specialist requirement"
+- Proceed with core analysis flow only
 
 ## Phase 5: Execute Agents
 
@@ -211,47 +270,95 @@ Task(
 - ✅ File contains comprehensive codebase analysis
 - ❌ If validation fails: re-launch with explicit output instruction
 
-### Step 2: Specialist Analysis (Parallel, if needed)
+### Step 2: Objective Specialist Selection and Launch
 
-**Launch specialists based on project characteristics:**
+**Apply specialist selection decision logic based on Implementation Detection Summary:**
 
-**If APIs detected:**
+**2.1: Parse Detection Summary**
+```
+Read ./.ccdocs/{project}/analysis/code-analysis.md
+Extract values from Implementation Detection Summary (based on semantic analysis):
+- ENDPOINTS_IMPLEMENTED: [count of network endpoints found]
+- API_FRAMEWORKS_DETECTED: [list of web/API frameworks, language-agnostic]  
+- DATABASE_CRUD_OPERATIONS: [true/false based on data persistence operations]
+- AUTHENTICATION_IMPLEMENTED: [true/false based on user auth logic]
+- AUTHORIZATION_LOGIC_FOUND: [true/false based on access control logic]
+- ENCRYPTION_USAGE_DETECTED: [true/false based on cryptographic operations]
+- PROJECT_TYPE: [Implementation|Specification|Mixed|Configuration]
+```
+
+**2.2: Apply Decision Logic and Output Transparency Log**
+```
+## Specialist Selection Decision Log
+
+# API Specialist Decision
+IF (ENDPOINTS_IMPLEMENTED > 0 OR len(API_FRAMEWORKS_DETECTED) > 0 OR DATABASE_CRUD_OPERATIONS == true):
+    ✅ API Specialist: LAUNCH - Rationale: Found [ENDPOINTS_IMPLEMENTED] endpoints, frameworks: [API_FRAMEWORKS_DETECTED], CRUD: [DATABASE_CRUD_OPERATIONS]
+    📊 Evidence: [specific files and patterns found]
+ELSE:
+    ✅ API Specialist: SKIP - Rationale: No API endpoints, frameworks, or CRUD operations detected
+    📊 Evidence: ENDPOINTS_IMPLEMENTED=0, API_FRAMEWORKS_DETECTED=[], DATABASE_CRUD_OPERATIONS=false
+
+# Security Specialist Decision  
+IF (AUTHENTICATION_IMPLEMENTED == true OR AUTHORIZATION_LOGIC_FOUND == true OR ENCRYPTION_USAGE_DETECTED == true):
+    ✅ Security Specialist: LAUNCH - Rationale: Auth: [AUTHENTICATION_IMPLEMENTED], Authorization: [AUTHORIZATION_LOGIC_FOUND], Encryption: [ENCRYPTION_USAGE_DETECTED]
+    📊 Evidence: [specific security patterns and files found]
+ELSE:
+    ✅ Security Specialist: SKIP - Rationale: No authentication, authorization, or encryption implementation detected
+    📊 Evidence: All security indicators false
+
+🏷️ Project Type: [PROJECT_TYPE]
+```
+
+**2.3: Launch Specialists (Only if Decision Logic indicates LAUNCH):**
+
+**Launch API Specialist (only if criteria met):**
 ```
 Task(
   subagent_type: "api-specialist",
-  prompt: "Task: Analyze APIs based on code-analyst findings.
+  prompt: "Task: Analyze APIs based on objective detection criteria.
+
+  OBJECTIVE EVIDENCE FOUND:
+  - ENDPOINTS_IMPLEMENTED: [count from detection summary]
+  - API_FRAMEWORKS_DETECTED: [list from detection summary]
+  - DATABASE_CRUD_OPERATIONS: [true/false from detection summary]
+  - ROUTE_HANDLERS_FOUND: [files from detection summary]
 
   CRITICAL: Base analysis ONLY on actual API code, route definitions, and implementation files.
   DO NOT use API documentation or comments as sources of truth.
-  Verify any documented API behavior against actual code implementation.
 
   Instructions:
   1. Read code-analyst findings: ./.ccdocs/{project}/analysis/code-analysis.md
-  2. Examine actual API endpoint implementations
-  3. Analyze route definitions, middleware, request/response handling
-  4. Document actual API behavior as implemented in code
-  5. Verify any claims against running code or implementation details
+  2. Focus on specific files identified in ROUTE_HANDLERS_FOUND
+  3. Examine actual API endpoint implementations
+  4. Analyze route definitions, middleware, request/response handling
+  5. Document actual API behavior as implemented in code
 
   Your configuration: ./.ccdocs/{project}/agent-handoffs/api-specialist-config.json"
 )
 ```
 
-**If security aspects relevant:**
+**Launch Security Specialist (only if criteria met):**
 ```
 Task(
   subagent_type: "security-reviewer", 
-  prompt: "Task: Analyze security aspects based on code-analyst findings.
+  prompt: "Task: Analyze security aspects based on objective detection criteria.
+
+  OBJECTIVE EVIDENCE FOUND:
+  - AUTHENTICATION_IMPLEMENTED: [true/false from detection summary]
+  - AUTHORIZATION_LOGIC_FOUND: [true/false from detection summary]
+  - ENCRYPTION_USAGE_DETECTED: [true/false from detection summary]
+  - INPUT_VALIDATION_IMPLEMENTED: [true/false from detection summary]
 
   CRITICAL: Base analysis ONLY on actual security implementation in code.
   DO NOT rely on security documentation or comments as sources of truth.
-  Examine actual authentication, authorization, and security code implementation.
 
   Instructions:
   1. Read code-analyst findings: ./.ccdocs/{project}/analysis/code-analysis.md
   2. Examine actual security implementation (auth, encryption, validation)
   3. Analyze access control, data protection, and vulnerability patterns
   4. Document actual security measures as implemented in code
-  5. Identify security gaps based on code analysis, not documentation claims
+  5. Focus only on areas where objective evidence was detected
 
   Your configuration: ./.ccdocs/{project}/agent-handoffs/security-reviewer-config.json"
 )
@@ -501,6 +608,14 @@ Task(
 ## Phase 8: Completion Report
 Report to user:
 - ✅ **Documents created**: [list of documents]
+- 🤖 **Specialist Selection Results**:
+  - API Specialist: [LAUNCHED|SKIPPED] - [rationale from decision log]
+  - Security Specialist: [LAUNCHED|SKIPPED] - [rationale from decision log]
+  - Project Type Classified: [Implementation|Specification|Mixed|Configuration]
+- 📊 **Objective Evidence Summary**:
+  - Endpoints Implemented: [count]
+  - API Frameworks Detected: [list or "None"]
+  - Security Implementation: [Auth: true/false, Authorization: true/false, Encryption: true/false]
 - 📊 **Diagrams generated**: [number] diagrams created (if applicable)
   - ASCII conversions: [number] converted to SVG
   - New diagrams added: [number] created for complex concepts
