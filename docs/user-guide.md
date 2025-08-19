@@ -151,8 +151,8 @@ The tool will ask you a few questions to customize the documentation:
    - Business stakeholders: High-level overviews and benefits
    - Operations team: Deployment and maintenance guides
 
-3. **"Output documentation location?"** (Default: `./docs`)
-   - Specify where you want the documentation files created
+3. **"Output documentation location?"** (Default: `{project-path}/docs`)
+   - Specify where you want the documentation files created in your target project
 
 4. **"Include diagrams?"** (Yes/No)
    - Yes: Generates visual diagrams for architecture and workflows
@@ -212,8 +212,8 @@ start ./docs/README.md  # (Windows)
 - `/path/to/project` = Specific project path
 - `../other-project` = Relative path to another project
 
-**`--docs-location`** (optional, default: `./docs`):
-- Where to place the generated documentation
+**`--docs-location`** (optional, default: `{project-path}/docs`):
+- Where to place the generated documentation in your target project
 - Creates directory if it doesn't exist
 - Existing files may be overwritten
 

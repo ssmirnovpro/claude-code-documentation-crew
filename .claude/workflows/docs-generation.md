@@ -13,7 +13,7 @@ Ask user questions. One by one.
 3. "Target audience?"
    - Developers, End users, Business stakeholders, Operations team,  Other (specify)
 
-4. "Output documentation location?" (Default: `./docs`)
+4. "Output documentation location?" (Default: `{project-path}/docs`)
 
 5. "Include diagrams?" (Yes/No)
 
@@ -541,7 +541,7 @@ After each agent execution:
 
 ### Copy to Output Location
 1. Read final document from `./.ccdocs/{project}/drafts/{document-type}.md`
-2. Copy to user-specified output location (default: `./docs/`)
+2. Copy to user-specified output location (default: `{project-path}/docs/`)
 3. Create `assets/` subdirectory in output location
 
 ## Phase 7: Visual Enhancement (if diagrams requested)

@@ -12,7 +12,7 @@ description: "Generate comprehensive technical documentation using multi-agent o
 
 ## Arguments
 - `project-path` - Path to the source project directory (required)
-- `--docs-location` - Where to place final documentation (default: ./docs)
+- `--docs-location` - Where to place final documentation (default: {project-path}/docs)
 - `--format` - Output format (default: markdown)
 - `--diagrams` - Include PlantUML diagrams (default: auto-detect need)
 

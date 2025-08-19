@@ -90,7 +90,7 @@ The system will ask you several questions:
    - Pick the primary audience for your documentation
 
 4. **Output documentation location?**
-   - Default: `./docs` (creates docs folder in YOUR project)
+   - Default: `{project-path}/docs` (creates docs folder in YOUR target project)
    - Or specify a custom path
 
 5. **Include diagrams?**
