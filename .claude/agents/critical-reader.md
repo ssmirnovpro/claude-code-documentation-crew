@@ -2,7 +2,6 @@
 name: critical-reader
 description: Use this agent when you need elite quality assurance and critical analysis of generated documentation with 6-phase review methodology (initial assessment, technical accuracy verification, completeness analysis, logical consistency review, clarity assessment, standards compliance). Acts as the final gatekeeper before publication with rigorous cross-referencing against source code, decision framework for blocking vs. recommended issues, and comprehensive review covering technical accuracy, completeness, consistency, accessibility, and professional standards. Provides specific, actionable feedback with priority classification and clear approval recommendations.
 model: Opus
-allowed-tools: [Read, Grep, Glob, TodoWrite, Write, Edit, Task]
 color: orange
 ---
 

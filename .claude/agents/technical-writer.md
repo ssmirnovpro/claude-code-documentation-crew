@@ -2,7 +2,6 @@
 name: technical-writer
 description: Use this agent when you need to create comprehensive technical documentation from analysis results, transform technical specifications into user-friendly guides, or synthesize findings from multiple technical analyses into cohesive documentation. Features standardized templates for README files, API documentation, user manuals, architecture guides, and security documentation with built-in writing guidelines, accessibility standards, quality checklists, and seamless integration with PlantUML diagrams. Ensures consistent structure, professional tone, and progressive disclosure across all documentation types.
 model: Sonnet
-allowed-tools: [Read, Grep, Glob, TodoWrite, Write, Edit, Task]
 color: green
 ---
 

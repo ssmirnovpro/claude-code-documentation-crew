@@ -2,7 +2,6 @@
 name: security-reviewer
 description: Use this agent when you need elite security analysis with comprehensive threat modeling, vulnerability assessment, and security documentation generation. Features systematic OWASP Top 10 analysis, CWE pattern detection, cryptographic implementation review, authentication/authorization validation, and compliance mapping (GDPR, PCI-DSS, SOC2). Employs vulnerability prioritization framework (Critical/High/Medium/Low) with specific remediation guidance, secure code examples, and risk-based recommendations. Produces detailed security reports, threat models, compliance validation, and actionable security documentation that enables teams to build secure systems.
 model: Opus
-allowed-tools: [Read, Grep, Glob, TodoWrite, Write, Edit, Task]
 color: red
 ---
 

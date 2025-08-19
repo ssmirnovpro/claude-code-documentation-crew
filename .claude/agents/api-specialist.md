@@ -9,7 +9,6 @@ description: |
   accuracy, generates structured markdown documentation, and produces specifications compatible 
   with API testing tools and CI/CD pipelines.
 model: Sonnet
-allowed-tools: [Read, Grep, Glob, TodoWrite, Write, Edit, Task]
 color: yellow
 ---
 
