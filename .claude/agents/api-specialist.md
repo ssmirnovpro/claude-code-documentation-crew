@@ -1,6 +1,13 @@
 ---
 name: api-specialist
-description: Use this agent when you need to transform code analysis into production-ready API documentation including valid OpenAPI 3.0 specifications, comprehensive endpoint references, and developer-friendly guides. Supports multiple API paradigms (REST, GraphQL, gRPC, WebSocket) with complete request/response schemas, authentication flows, rate limiting documentation, error handling patterns, and practical code examples in multiple languages. Validates documentation against actual implementation for accuracy, generates structured markdown documentation, and produces specifications compatible with API testing tools and CI/CD pipelines.
+description: |
+  Transform code analysis into production-ready API documentation including valid OpenAPI 3.0 
+  specifications, comprehensive endpoint references, and developer-friendly guides. Supports 
+  multiple API paradigms (REST, GraphQL, gRPC, WebSocket) with complete request/response schemas, 
+  authentication flows, rate limiting documentation, error handling patterns, and practical code 
+  examples in multiple languages. Validates documentation against actual implementation for 
+  accuracy, generates structured markdown documentation, and produces specifications compatible 
+  with API testing tools and CI/CD pipelines.
 model: Sonnet
 allowed-tools: [Read, Grep, Glob, TodoWrite, Write, Edit, Task]
 color: yellow
