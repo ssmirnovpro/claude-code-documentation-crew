@@ -7,6 +7,7 @@
 Ask user questions. One by one.
 
 1. Which project do you want to document? (Default: current project)
+   - **If GitHub URL detected**: Note that repository cloning will be handled in Phase 4
 2. "Which documents do you need?" 
    - API Reference, User Guide, Architecture Overview, Security Documentation, Deployment Guide, Other (specify)
 
@@ -143,9 +144,61 @@ For each required agent, create config file in `agent-handoffs/`:
 }
 ```
 
-## Phase 4: Intelligent Specialist Selection
+## Phase 4: Repository Acquisition (Conditional)
 
-### Step 4.1: Read Implementation Detection Summary
+**Only executes if project path is a GitHub URL (contains github.com)**
+
+### Step 4.1: GitHub URL Detection
+Check if project path matches patterns:
+- `https://github.com/...`
+- `git@github.com:...` 
+- Contains `github.com`
+
+### Step 4.2: Repository Accessibility Check
+Test repository accessibility:
+```bash
+git ls-remote [github-url] &>/dev/null
+```
+
+**If accessible**: Continue to Step 4.3  
+**If not accessible**: 
+- Output: "❌ Repository not accessible. Please check URL or download manually."
+- Ask user to provide local path instead
+- Return to Phase 1 with corrected path
+
+### Step 4.3: Storage Location Selection
+Ask user: "Where should I clone the repository?"
+- **Default**: `./.ccdocs/{extracted-repo-name}/project-source` 
+- **Validate**: Check directory write permissions
+- **Handle conflicts**: If directory exists, ask for confirmation to overwrite
+
+### Step 4.4: Repository Cloning
+Execute cloning with progress indication:
+```bash
+git clone [github-url] [target-path]
+```
+
+**Error handling:**
+- **Large repositories**: Show estimated size/time
+- **Network issues**: Suggest retry or shallow clone
+- **Permission errors**: Suggest alternative location
+- **Authentication required**: Guide user to authenticate or download manually
+
+### Step 4.5: Configuration Updates
+Update all agent configuration files:
+- Replace GitHub URL with local project path: `[target-path]`
+- Verify all config files point to correct local directory
+- Update project references throughout workspace
+
+### Step 4.6: Verification
+- ✅ Repository cloned successfully
+- ✅ All agent configs updated with local paths  
+- ✅ Project structure accessible for analysis
+- ❌ If verification fails: cleanup and request manual download
+
+## Phase 5: Intelligent Specialist Selection
+
+### Step 5.1: Read Implementation Detection Summary
 
 After code-analyst completes initial analysis, read the Implementation Detection Summary from `./.ccdocs/{project}/analysis/code-analysis.md` to extract objective selection criteria:
 
@@ -167,7 +220,7 @@ Project Classification:
 - IMPLEMENTATION_COMPLETENESS: [None|Partial|Complete]
 ```
 
-### Step 4.2: Automated Decision Logic
+### Step 5.2: Automated Decision Logic
 
 Apply objective specialist selection rules:
 
@@ -189,7 +242,7 @@ THEN launch security-reviewer
 ELSE skip security-reviewer
 ```
 
-### Step 4.3: Decision Transparency
+### Step 5.3: Decision Transparency
 
 Before proceeding, output specialist selection decision log:
 
@@ -201,7 +254,7 @@ Before proceeding, output specialist selection decision log:
 🏷️ Project Type: [PROJECT_TYPE from detection summary]
 ```
 
-### Step 4.4: Universal Agent Flow
+### Step 5.4: Universal Agent Flow
 
 All document types follow this flow with specialists selected objectively:
 
@@ -220,7 +273,7 @@ All document types follow this flow with specialists selected objectively:
    - **plantuml-diagrammer** → create/enhance diagrams
    - **critical-reader** (diagram validation)
 
-### Step 4.5: Edge Case Handling
+### Step 5.5: Edge Case Handling
 
 **Pure Specification Projects** (PROJECT_TYPE: Specification, IMPLEMENTATION_COMPLETENESS: None):
 - Skip all specialists
@@ -240,7 +293,7 @@ All document types follow this flow with specialists selected objectively:
 - Document rationale: "Insufficient objective evidence for specialist requirement"
 - Proceed with core analysis flow only
 
-## Phase 5: Execute Agents
+## Phase 6: Execute Agents
 
 ### Step 1: Initial Analysis Phase
 
@@ -537,14 +590,14 @@ After each agent execution:
 - ✅ critical-reader approval (where applicable)
 - ❌ If any validation fails: implement correction cycle
 
-## Phase 6: Final Assembly
+## Phase 7: Final Assembly
 
 ### Copy to Output Location
 1. Read final document from `./.ccdocs/{project}/drafts/{document-type}.md`
 2. Copy to user-specified output location (default: `{project-path}/docs/`)
 3. Create `assets/` subdirectory in output location
 
-## Phase 7: Visual Enhancement (if diagrams requested)
+## Phase 8: Visual Enhancement (if diagrams requested)
 **Important**: Only if user requested diagrams in Phase 1:
 
 ### Step 1: Diagram Generation
@@ -605,7 +658,7 @@ Task(
 - ✅ critical-reader approval of diagram quality and integration
 - ✅ No placeholder markers or broken references remain
 
-## Phase 8: Completion Report
+## Phase 9: Completion Report
 Report to user:
 - ✅ **Documents created**: [list of documents]
 - 🤖 **Specialist Selection Results**:
