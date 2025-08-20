@@ -5,6 +5,31 @@ All notable changes to the Claude Code Documentation Crew project will be docume
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-08-20
+
+### Changed
+- **PlantUML Diagrammer Agent Enhancement**: Major update to readability-first approach
+  - Replaced hardcoded element limits with browser-based quality validation
+  - Added Playwright integration for real-world diagram testing in 800px viewports
+  - Implemented visual balance requirements with canvas utilization metrics
+  - Dynamic element count based on readability outcomes (14 readable elements > 5 confusing elements)
+  - Added comprehensive quality validation protocol with iterative improvement
+  - Enhanced layout optimization with quadrant distribution analysis
+  - Context-aware design for documentation embedding rather than full-screen viewing
+
+### Technical Improvements
+- **Browser-Based Validation**: Playwright testing replaces SVG-only analysis
+- **Dynamic Quality Metrics**: Readability measured in actual browser context
+- **Visual Balance Analysis**: Automated detection of layout issues and empty space problems
+- **Iterative Refinement Process**: Continuous improvement based on validation feedback
+- **Professional Quality Standards**: Measurable criteria for diagram approval
+
+### Impact
+- Diagrams now optimized for real documentation usage scenarios
+- Significant improvement in diagram readability when embedded in markdown/docs
+- Better visual balance with no large empty corners or cramped layouts
+- Quality-driven approach replaces arbitrary technical constraints
+
 ## [1.0.0] - 2025-08-17
 
 ### Added
@@ -86,4 +111,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The system successfully handles complex multi-agent workflows and produces professional-quality output
 - Kroki Docker setup is optional with automatic fallback to public API for universal accessibility
 
+[1.0.1]: https://github.com/your-org/claude-code-documentation-crew/releases/tag/v1.0.1
 [1.0.0]: https://github.com/your-org/claude-code-documentation-crew/releases/tag/v1.0.0
