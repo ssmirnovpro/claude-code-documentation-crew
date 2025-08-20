@@ -16,7 +16,7 @@ package "Project Root" {
       file "critical-reader-analysis-config.json" as CriticalReaderConfig
       file "api-specialist-config.json" as ApiSpecialistConfig
       file "security-reviewer-config.json" as SecurityReviewerConfig
-      file "plantuml-diagrammer-config.json" as PlantUMLDiagrammerConfig
+      file "doc-diagrammer-config.json" as DocDiagrammerConfig
     }
     
     folder "analysis/" as Analysis {
@@ -33,7 +33,7 @@ package "Project Root" {
     }
     
     folder "diagrams/" as Diagrams {
-      file "{diagram-name}.puml" as PlantUMLSource
+      file "{diagram-name}.{format}" as DiagramSource
       file "{diagram-name}.svg" as SVGRendered
     }
   }
@@ -53,7 +53,7 @@ ApiAnalysis --> DocumentDrafts : consumed by\ntechnical-writer
 SecurityAnalysis --> DocumentDrafts : consumed by\ntechnical-writer
 DocumentDrafts --> FinalDocs : finalized by\ntechnical-writer
 
-PlantUMLSource --> SVGRendered : rendered by\nKroki service
+DiagramSource --> SVGRendered : rendered by\nKroki service
 SVGRendered --> OutputDiagrams : copied to assets
 DiagramMetadata --> OutputDiagrams : integration info
 
@@ -61,7 +61,7 @@ DiagramMetadata --> OutputDiagrams : integration info
 CodeAnalystConfig --> CodeAnalysis : configures
 TechnicalWriterConfig --> DocumentDrafts : configures
 CriticalReaderConfig --> AnalysisReview : configures
-PlantUMLDiagrammerConfig --> PlantUMLSource : configures
+DocDiagrammerConfig --> DiagramSource : configures
 
 note right of CcdocsRoot
   Complete state persistence

@@ -27,7 +27,7 @@ package "Documentation Generation Layer" {
 }
 
 package "Visual Enhancement Layer" {
-  component [plantuml-diagrammer] as PlantUMLDiagrammer
+  component [doc-diagrammer] as DocDiagrammer
   component [Kroki Service] as KrokiService
   component [Quality Validation] as DiagramQuality
 }
@@ -70,8 +70,8 @@ TechnicalWriter --> CriticalReader : document review
 CriticalReader --> TechnicalWriter : validation feedback
 
 ' Visual enhancement
-TechnicalWriter --> PlantUMLDiagrammer : diagram requests
-PlantUMLDiagrammer --> KrokiService : renders diagrams
+TechnicalWriter --> DocDiagrammer : diagram requests
+DocDiagrammer --> KrokiService : renders diagrams
 KrokiService --> KrokiLocal : primary service
 KrokiService --> KrokiExternal : fallback service
 KrokiLocal --> DiagramQuality : validates output
@@ -79,8 +79,8 @@ KrokiExternal --> DiagramQuality : validates output
 DiagramQuality --> FileSystem : stores SVG files
 
 ' Quality validation for diagrams
-PlantUMLDiagrammer --> CriticalReader : diagram review
-CriticalReader --> PlantUMLDiagrammer : diagram feedback
+DocDiagrammer --> CriticalReader : diagram review
+CriticalReader --> DocDiagrammer : diagram feedback
 
 note right of CriticalReader
   Quality Gatekeeper

@@ -8,7 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2025-08-20
 
 ### Changed
-- **PlantUML Diagrammer Agent Enhancement**: Major update to readability-first approach
+- **Agent Rename**: `plantuml-diagrammer` → `doc-diagrammer` to reflect multi-format support
+  - Agent now supports PlantUML, D2, and Mermaid diagram formats
+  - Updated all references throughout codebase and documentation
+  - Updated diagram source files to use generic format placeholders (`{diagram-name}.{format}`)
+  - Replaced PlantUML-specific component names with format-agnostic alternatives
+  - Regenerated SVG diagrams with updated component names and references
+- **Doc Diagrammer Agent Enhancement**: Major update to readability-first approach
   - Replaced hardcoded element limits with browser-based quality validation
   - Added Playwright integration for real-world diagram testing in 800px viewports
   - Implemented visual balance requirements with canvas utilization metrics

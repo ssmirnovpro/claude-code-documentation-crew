@@ -51,7 +51,7 @@ You will organize all documentation following this hierarchy:
   - **NEVER create ASCII diagrams** if PlantUML diagrams are requested
   - Use placeholder markers like `<!-- DIAGRAM: component-overview -->` for later replacement
   - Indicate diagram placement with comments: `<!-- INSERT DIAGRAM AFTER THIS SECTION -->`
-  - Let plantuml-diagrammer agent handle all visual diagrams in post-processing
+  - Let doc-diagrammer agent handle all visual diagrams in post-processing
 
 **Documentation Types & Templates**:
 

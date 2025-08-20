@@ -57,7 +57,7 @@ Each agent has a single, well-defined responsibility:
 - **technical-writer**: Transform technical analysis into user-friendly documentation
 - **critical-reader**: Quality assurance and validation gatekeeper
 - **api-specialist**: API documentation and OpenAPI specification generation
-- **plantuml-diagrammer**: Visual diagram generation with automated quality validation
+- **doc-diagrammer**: Visual diagram generation with automated quality validation
 - **security-reviewer**: Elite security analysis with comprehensive threat modeling
 
 ### Configuration-Driven Coordination
@@ -111,7 +111,7 @@ Agent coordination occurs through JSON configuration files that specify:
 - **Prioritization**: Critical/High/Medium/Low vulnerability classification
 - **Output**: Security documentation with actionable remediation guidance
 
-**plantuml-diagrammer (Visual Enhancement)**
+**doc-diagrammer (Visual Enhancement)**
 - **Purpose**: Visual diagram generation with automated quality validation
 - **Model**: Sonnet
 - **Integration**: Kroki service (localhost:8001 preferred, kroki.io fallback)
@@ -144,7 +144,7 @@ Phase 4: Document Creation
 └── critical-reader (document validation)
 
 Phase 5: Visual Enhancement (if requested)
-├── plantuml-diagrammer (diagram generation)
+├── doc-diagrammer (diagram generation)
 └── critical-reader (diagram validation)
 
 Phases 6-8: Finalization and Quality Assurance
@@ -193,7 +193,7 @@ Both agents execute concurrently, reading same input sources but producing diffe
 
 **Agent-Specific Extensions**:
 - **critical-reader**: focus_areas, validation_type, previous_issues_file
-- **plantuml-diagrammer**: analysis_mode, diagram_types, output_format
+- **doc-diagrammer**: analysis_mode, diagram_types, output_format
 - **api-specialist**: api_specification_format, example_languages
 - **security-reviewer**: threat_model_depth, vulnerability_priority_threshold
 
@@ -208,7 +208,7 @@ Both agents execute concurrently, reading same input sources but producing diffe
 │   ├── critical-reader-analysis-config.json
 │   ├── api-specialist-config.json
 │   ├── security-reviewer-config.json
-│   └── plantuml-diagrammer-config.json
+│   └── doc-diagrammer-config.json
 ├── analysis/                 # Analysis and review outputs
 │   ├── code-analysis.md      # Primary codebase analysis
 │   ├── analysis-review-report.md
@@ -513,7 +513,7 @@ quality_criteria = {
 - **code-analyst**: Check input project path accessibility and file permissions
 - **technical-writer**: Verify input analysis files exist and contain expected content
 - **critical-reader**: Review focus_areas configuration and validation_type settings
-- **plantuml-diagrammer**: Test Kroki service endpoints manually
+- **doc-diagrammer**: Test Kroki service endpoints manually
 
 ## Best Practices
 

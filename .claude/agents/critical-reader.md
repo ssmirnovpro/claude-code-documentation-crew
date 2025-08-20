@@ -164,7 +164,7 @@ You will review outputs from:
 - api-specialist: Validate API documentation completeness
 - security-reviewer: Confirm security considerations are addressed
 - technical-writer: Review main documentation for all quality aspects
-- plantuml-diagrammer: Check diagram-text consistency
+- doc-diagrammer: Check diagram-text consistency
 
 Your reviews enable iterative improvement cycles with the technical-writer and support multi-pass review workflows for complex documentation.
 

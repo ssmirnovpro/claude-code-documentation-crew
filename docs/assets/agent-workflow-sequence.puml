@@ -7,7 +7,7 @@ participant "critical-reader" as CriticalReader
 participant "api-specialist" as ApiSpecialist
 participant "security-reviewer" as SecurityReviewer
 participant "technical-writer" as TechnicalWriter
-participant "plantuml-diagrammer" as PlantUMLDiagrammer
+participant "doc-diagrammer" as DocDiagrammer
 
 note over Master : Phase 1: Foundation Analysis
 Master -> CodeAnalyst : Primary codebase analysis
@@ -70,11 +70,11 @@ CriticalReader --> Master : validation-report.md
 deactivate CriticalReader
 
 note over Master : Phase 5: Visual Enhancement
-Master -> PlantUMLDiagrammer : Generate diagrams
-activate PlantUMLDiagrammer
-PlantUMLDiagrammer -> PlantUMLDiagrammer : Create and validate diagrams
-PlantUMLDiagrammer --> Master : SVG diagrams + metadata
-deactivate PlantUMLDiagrammer
+Master -> DocDiagrammer : Generate diagrams
+activate DocDiagrammer
+DocDiagrammer -> DocDiagrammer : Create and validate diagrams
+DocDiagrammer --> Master : SVG diagrams + metadata
+deactivate DocDiagrammer
 
 Master -> CriticalReader : Diagram validation
 activate CriticalReader

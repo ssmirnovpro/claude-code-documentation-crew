@@ -131,7 +131,7 @@ For each required agent, create config file in `agent-handoffs/`:
 }
 ```
 
-**plantuml-diagrammer-config.json**:
+**doc-diagrammer-config.json**:
 ```json
 {
   "input_location": "{output-location}",
@@ -601,15 +601,15 @@ After each agent execution:
 **Important**: Only if user requested diagrams in Phase 1:
 
 ### Step 1: Diagram Generation
-Launch `plantuml-diagrammer` agent:
+Launch `doc-diagrammer` agent:
 
 ```
 Task(
-  subagent_type: "plantuml-diagrammer",
+  subagent_type: "doc-diagrammer",
   prompt: "Analyze documentation at [output-location] and enhance with diagrams. 
   Target audience: {audience}. 
   Document type: {document-type}.
-  Configuration: ./.ccdocs/{project}/agent-handoffs/plantuml-diagrammer-config.json"
+  Configuration: ./.ccdocs/{project}/agent-handoffs/doc-diagrammer-config.json"
 )
 ```
 
@@ -631,10 +631,10 @@ If critical-reader identifies issues requiring correction:
 1. **Re-launch plantuml-diagrammer** with specific feedback:
 ```
 Task(
-  subagent_type: "plantuml-diagrammer", 
+  subagent_type: "doc-diagrammer", 
   prompt: "Address critical-reader issues: {specific_feedback}. 
   Update diagrams and documentation integration.
-  Configuration: ./.ccdocs/{project}/agent-handoffs/plantuml-diagrammer-config.json"
+  Configuration: ./.ccdocs/{project}/agent-handoffs/doc-diagrammer-config.json"
 )
 ```
 

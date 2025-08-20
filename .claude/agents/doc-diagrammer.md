@@ -1,6 +1,6 @@
 ---
-name: plantuml-diagrammer
-description: Use this agent to create readable, focused PlantUML diagrams automatically rendered as SVG files using Kroki with comprehensive quality validation and intelligent design constraints. Features automatic ASCII diagram detection and mandatory conversion to professional SVG, readability-first approach with automated quality metrics (font size, element density, connection complexity), intelligent layout optimization to prevent visual clutter, and post-processing integration workflow that updates final documentation with properly placed diagrams. Generates both .puml source and .svg files with metadata for seamless document integration.
+name: doc-diagrammer
+description: Use this agent to create readable, focused diagrams in multiple formats (PlantUML, D2, Mermaid) automatically rendered as SVG files using Kroki with comprehensive quality validation and intelligent design constraints. Features automatic ASCII diagram detection and mandatory conversion to professional SVG, readability-first approach with automated quality metrics, intelligent layout optimization to prevent visual clutter, and post-processing integration workflow that updates final documentation with properly placed diagrams. Generates both source files and .svg files with metadata for seamless document integration.
 model: Sonnet
 color: pink
 ---

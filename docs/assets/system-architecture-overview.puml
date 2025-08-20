@@ -10,7 +10,7 @@ package "Hub-and-Spoke Coordination" {
     component [critical-reader] as CriticalReader
     component [api-specialist] as ApiSpecialist
     component [security-reviewer] as SecurityReviewer
-    component [plantuml-diagrammer] as PlantUMLDiagrammer
+    component [doc-diagrammer] as DocDiagrammer
   }
   
   package "Configuration" {
@@ -34,7 +34,7 @@ MasterWorkflow --> TechnicalWriter : orchestrates
 MasterWorkflow --> CriticalReader : validates
 MasterWorkflow --> ApiSpecialist : triggers
 MasterWorkflow --> SecurityReviewer : triggers
-MasterWorkflow --> PlantUMLDiagrammer : triggers
+MasterWorkflow --> DocDiagrammer : triggers
 
 JsonConfig --> AgentHandoffs
 AgentHandoffs --> CodeAnalyst
@@ -46,8 +46,8 @@ CodeAnalyst --> FileSystem
 TechnicalWriter --> FileSystem
 CriticalReader --> FileSystem
 
-PlantUMLDiagrammer --> KrokiLocal : primary
-PlantUMLDiagrammer --> KrokiExternal : fallback
+DocDiagrammer --> KrokiLocal : primary
+DocDiagrammer --> KrokiExternal : fallback
 
 CriticalReader --> CodeAnalyst : validates
 CriticalReader --> TechnicalWriter : validates
